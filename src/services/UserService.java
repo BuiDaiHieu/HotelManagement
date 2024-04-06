@@ -12,8 +12,8 @@ public class UserService implements Management<User> {
     static {
         User user1 = new User();
         user1.setId(1);
-        user1.setUserName("khanh");
-        user1.setPassword("123");
+        user1.setUserName("Hieu Bui");
+        user1.setPassword("123456");
         user1.setRole("Admin");
         userList.add(user1);
     }
@@ -22,9 +22,9 @@ public class UserService implements Management<User> {
 
     @Override
     public User findById(long id) {
-        for (int i = 0; i < userList.size(); i++) {
-            if (userList.get(i).getId() == id) {
-                return userList.get(i);
+        for (User value : userList) {
+            if (value.getId() == id) {
+                return value;
             }
         }
         return null;
@@ -32,17 +32,17 @@ public class UserService implements Management<User> {
 
     @Override
     public void printList() {
-        System.out.printf("%-16s%-26s%-26s%n", "Id:", "User Name:", "Role:");
-        for (int i = 0; i < userList.size(); i++) {
-            System.out.println(userList.get(i));
+        System.out.printf("%-16s%-26s%-26s%n", "Id:", "Username:", "Role:");
+        for (User value : userList) {
+            System.out.println(value);
         }
     }
 
     @Override
     public void updateById(long id, User user) {
-        for (int i = 0; i < userList.size(); i++) {
-            if (userList.get(i).getId() == id) {
-                userList.get(i).setPassword(user.getPassword());
+        for (User value : userList) {
+            if (value.getId() == id) {
+                value.setPassword(user.getPassword());
                 break;
             }
         }
@@ -66,9 +66,9 @@ public class UserService implements Management<User> {
     }
 
     public boolean checkLogin(String username, String password) {
-        for (int i = 0; i < userList.size(); i++) {
-            if (userList.get(i).getUserName().equals(username) && userList.get(i).getPassword().equals(password)) {
-                user = userList.get(i);
+        for (User value : userList) {
+            if (value.getUserName().equals(username) && value.getPassword().equals(password)) {
+                user = value;
                 return true;
             }
         }

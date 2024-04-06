@@ -1,7 +1,7 @@
 package models;
 
 public class Customer {
-    private long idCustomer;
+    private long customerId;
     private String citizenIdentificationCard;
     private int age;
     private String phoneNumber;
@@ -31,12 +31,12 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public long getIdCustomer() {
-        return idCustomer;
+    public long getCustomerId() {
+        return customerId;
     }
 
-    public void setIdCustomer(long idCustomer) {
-        this.idCustomer = idCustomer;
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
     }
 
     public String getCitizenIdentificationCard() {
@@ -49,6 +49,6 @@ public class Customer {
 
     @Override
     public String toString() {
-        return String.format("%-20s%-30s%-30s%-18s", getIdCustomer(), getCitizenIdentificationCard(), getAge(), getPhoneNumber());
+        return String.format("%-20s%-30s%-30s%-18s", getCustomerId(), getCitizenIdentificationCard(), getAge(), getPhoneNumber());
     }
 }

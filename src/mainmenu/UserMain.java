@@ -1,5 +1,6 @@
 package mainmenu;
 
+import com.sun.tools.javac.Main;
 import models.User;
 import services.UserService;
 
@@ -12,69 +13,29 @@ public class UserMain {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void login() {
-        while (true) {
-            System.out.println("Tên đăng nhập:");
-            String username = scanner.nextLine();
-            System.out.println("Mật khẩu:");
-            String password = scanner.nextLine();
-            boolean check = userService.checkLogin(username, password);
-            if (check) {
-                System.out.println("Đăng nhập thành công");
-                System.out.println("Xin chào: " + UserService.user.getUserName());
-                try {
-                    choiceRoomService();
-                    choiceManagement();
-                    break;
-                } catch (Exception e) {
-                    choiceRoomService();
-                    choiceManagement();
-                }
-            } else {
-                System.out.println("Tên đăng nhập hoặc mật khẩu không đúng");
+        System.out.println("Username:");
+        String username = scanner.nextLine();
+        System.out.println("Password:");
+        String password = scanner.nextLine();
+        boolean check = userService.checkLogin(username, password);
+        if (check) {
+            System.out.println("Log in successfully");
+            System.out.println("Greetings, " + UserService.user.getUserName());
+            try {
+                MainMenu.chooseService();
+            } catch (Exception e) {
+                MainMenu.chooseService();
             }
-        }
-    }
-
-    public static void choiceRoomService() {
-        System.out.println("Mời chọn");
-        System.out.println("1. Quản lý phòng");
-        System.out.println("2. Quản lý khách hàng");
-        System.out.println("3. Quay lại đăng nhập");
-        System.out.println("4. Quay lại đăng kí");
-    }
-
-    public static void choiceManagement() {
-        Scanner scanner1 = new Scanner(System.in);
-        int choice = scanner1.nextInt();
-        switch (choice) {
-            case 1: {
-                RoomMain.addNewRoom();
-                break;
-            }
-            case 2: {
-
-                break;
-            }
-            case 3: {
-                UserMain.login();
-            }
-            case 4: {
-                UserMain.register();
-            }
-            case 0: {
-                System.exit(0);
-            }
-            default: {
-                System.out.println("Có lỗi xảy ra");
-            }
+        } else {
+            System.out.println("Incorrect username or password. Directing to main menu");
         }
     }
 
     public static void register() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Tên đăng nhập:");
+        System.out.println("Username:");
         String username = scanner.nextLine();
-        System.out.println("Mật khẩu:");
+        System.out.println("Password:");
         String password = scanner.nextLine();
         User user = new User(username, password);
         userService.add(user);

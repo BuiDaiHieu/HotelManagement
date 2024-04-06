@@ -9,20 +9,11 @@ public class RoomService implements Management<Room> {
 
     static List<Room> roomList = new ArrayList<>();
 
-    static {
-        Room room1 = new Room(1, "Phòng Trống", 1, 1, 200);
-        Room room2 = new Room(2, "Phòng Trống", 5, 1, 2000);
-        Room room3 = new Room(3, "Phòng Trống", 10, 1, 20000);
-        roomList.add(room1);
-        roomList.add(room2);
-        roomList.add(room3);
-    }
-
     @Override
     public Room findById(long id) {
-        for (int i = 0; i < roomList.size(); i++) {
-            if (roomList.get(i).getRoomNumber() == id) {
-                return roomList.get(i);
+        for (Room room : roomList) {
+            if (room.getRoomNumber() == id) {
+                return room;
             }
         }
         return null;
@@ -30,17 +21,19 @@ public class RoomService implements Management<Room> {
 
     @Override
     public void printList() {
-        System.out.printf("%-16s%-26s%-26s%-26s%n", "Room Number:", "Status:", "Number Of Bed rooms", "Number Of Bath Rooms");
-        for (int i = 0; i < roomList.size(); i++) {
-            System.out.println(roomList.get(i));
+        System.out.println("-----------------------------------------");
+        System.out.printf("%-16s%-26s%-26s%-26s%-26s%n", "Room Number", "Status", "Number Of Bedrooms", "Number Of Bathrooms", "Price");
+        for (Room room : roomList) {
+            System.out.println(room);
         }
+        System.out.println("-----------------------------------------");
     }
 
     @Override
     public void updateById(long id, Room room) {
-        for (int i = 0; i < roomList.size(); i++) {
-            if (roomList.get(i).getRoomNumber() == id) {
-                roomList.get(i).setStatus(room.getStatus());
+        for (Room value : roomList) {
+            if (value.getRoomNumber() == id) {
+                value.setStatus(room.getStatus());
                 break;
             }
         }
@@ -57,8 +50,10 @@ public class RoomService implements Management<Room> {
         for (int i = 0; i < roomList.size(); i++) {
             if (roomList.get(i).getRoomNumber() == id) {
                 roomList.remove(i);
+                System.out.println("Room deleted");
                 return;
             }
         }
+        System.out.println("Cannot find the room with the given ID");
     }
 }

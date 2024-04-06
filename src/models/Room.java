@@ -61,6 +61,6 @@ public class Room {
 
     @Override
     public String toString() {
-        return String.format("%-16s%-26s%-26s%-26s%n", getRoomNumber(), getStatus(), getNumberOfBedrooms(), getNumberOfBathrooms());
+        return String.format("%-16s%-26s%-26s%-26s%-26s%n", getRoomNumber(), getStatus(), getNumberOfBedrooms(), getNumberOfBathrooms(), getPrice());
     }
 }
